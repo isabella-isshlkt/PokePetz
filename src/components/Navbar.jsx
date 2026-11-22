@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar() {
@@ -7,11 +8,12 @@ function Navbar() {
                 <span>PokéPetz</span>
             </div>
 
-            <ul className= "navbar-links">
-            <li><a href= "#início">Início</a></li>  
-            <li><a href= "#adote">Adote aqui!</a></li>
-            <li><a href= "#loja">PokéMart</a></li>
-            </ul>
+        <ul className= "navbar-links">
+            <li><NavLink to="/" end>Início</NavLink></li>
+            <li><NavLink to="/adote">Adote aqui!</NavLink></li>
+            <li><NavLink to="/como-adotar">Como adotar</NavLink></li>
+            <li><NavLink to="/produtos">PokéMart</NavLink></li>
+        </ul>
         </nav>
     )
 }

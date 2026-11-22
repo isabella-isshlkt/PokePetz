@@ -1,21 +1,25 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar'
-
+import Inicio from './pages/Inicio'
+import AdoteAqui from './pages/AdoteAqui'
+import ComoAdotar from './pages/ComoAdotar'
+import PokeMart from './pages/PokeMart'
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
       <Navbar />
-      
-      <header>
-        <h1>PokéPetz</h1>
-        <p>Centro de adoção e Poké Mart</p>
-        <main>
-          <h2>Seja bem-vindo ao PokéPetz!</h2>
-          <p>Aqui temos tudo que você precisa</p>
-        </main>
-      </header>
-    </div>
+      <main className="app-content">
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/adote" element={<AdoteAqui />} />
+          <Route path="/como-adotar" element={<ComoAdotar />} />
+          <Route path="/produtos" element={<PokeMart />} />
+          <Route path="*" element={<Inicio />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   )
 }
 
