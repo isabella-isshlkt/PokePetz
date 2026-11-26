@@ -1,0 +1,74 @@
+.perfil-secao {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.perfil-secao h2 {
+  color: #1e293b;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+
+.perfil-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.perfil-cabecalho h2 {
+  border-bottom: none;
+  margin-bottom: 4px;
+  padding-bottom: 0;
+}
+
+.perfil-saldo {
+  background-color: #fef9c3;
+  border: 2px solid #facc15;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-align: right;
+}
+
+.perfil-saldo span {
+  display: block;
+  font-size: 14px;
+  color: #854d0e;
+}
+
+.perfil-saldo strong {
+  font-size: 22px;
+  color: #1e293b;
+}
+
+.texto-vazio {
+  color: #64748b;
+  font-style: italic;
+}
+
+.pets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.pet-adotado-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.pet-adotado-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
