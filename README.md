@@ -1,16 +1,20 @@
-# React + Vite
+# PokéPetz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação React com API Express e MongoDB.
 
-Currently, two official plugins are available:
+## Executar localmente
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Instale as dependências na raiz do projeto com `npm install`.
+2. Copie `server/.env.example` para `server/.env` e preencha `MONGODB_URI`.
+3. Inicie a API com `npm run dev:server`.
+4. Em outro terminal, inicie o frontend com `npm run dev`.
 
-## React Compiler
+O frontend usa o proxy `/api` configurado no Vite para falar com a API local.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Conta e adoção
 
-## Expanding the ESLint configuration
+Após entrar ou criar uma conta, a sessão é salva neste navegador e restaurada ao abrir ou atualizar o site. As sessões expiram após 30 dias e podem ser encerradas pelo botão **Sair**.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+É necessário estar autenticado para adotar Pokémon. A API também valida a sessão antes de registrar uma adoção; entrar no site após a expiração encaminha o usuário para o login.
+
+As senhas novas são armazenadas com hash scrypt. Senhas antigas em texto puro são atualizadas para hash no próximo login bem-sucedido.
