@@ -15,12 +15,11 @@ function App() {
 
   // Função chamada ao clicar em "Quero adotar!"
   function adotarPokemon(pokemon) {
-    // Verifica se o Pokémon já está na lista para evitar duplicados
-    const jaExiste = adotados.some((item) => item.id === pokemon.id)
-
-    if (!jaExiste) {
-      setAdotados([...adotados, pokemon])
-    }
+    setAdotados((atuais) =>
+      atuais.some((item) => item.id === pokemon.id)
+        ? atuais
+        : [...atuais, pokemon],
+    )
   }
 
   return (
@@ -40,6 +39,7 @@ function App() {
             path="/perfil"
             element={<Perfil adotados={adotados} />}
           />
+          <Route path="*" element={<Inicio />} />
         </Routes>
       </main>
     </BrowserRouter>

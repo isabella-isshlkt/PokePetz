@@ -51,6 +51,28 @@ body {
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
+.inicio-logo {
+  width: 220px;
+  max-width: 70%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.btn-principal {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-principal:hover {
+  background: #1e40af;
+}
+
 @media (max-width: 640px) {
   .app-content {
     padding: 24px 16px;

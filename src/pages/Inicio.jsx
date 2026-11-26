@@ -1,20 +1,22 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './App.css'
-import Navbar from './components/Navbar'
-import Inicio from './pages/Inicio'
-import AdoteAqui from './pages/AdoteAqui'
+import { Link } from 'react-router-dom'
+import hero from '../assets/hero.png'
 
-function App() {
+function Inicio() {
   return (
-    <BrowserRouter>
-      <Navbar />
+    <main className="page inicio-page">
+      <header>
+        <img src={hero} alt="PokéPetz" className="inicio-logo" />
+        <h1>Bem-vindo ao PokéPetz!</h1>
+        <p>Encontre o parceiro Pokémon perfeito para viver novas aventuras com você.</p>
+      </header>
 
-      <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/adote" element={<AdoteAqui />} />
-      </Routes>
-    </BrowserRouter>
+      <section>
+        <h2>Adote com carinho</h2>
+        <p>Conheça os Pokémon disponíveis, leia suas características e adicione seu novo amigo ao perfil.</p>
+        <Link to="/adote" className="btn-principal">Conhecer Pokémon</Link>
+      </section>
+    </main>
   )
 }
 
-export default App
+export default Inicio

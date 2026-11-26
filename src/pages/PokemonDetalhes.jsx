@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { pokemons } from '../data/pokemons'
 import './PokemonDetalhes.css'
 
-function PokemonDetalhes({ adotarPokemon, adotados }) {
+function PokemonDetalhes({ adotarPokemon, adotados = [] }) {
   const { id } = useParams()
   const pokemon = pokemons.find((item) => item.id === Number(id))
 
