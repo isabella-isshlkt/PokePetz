@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './PokemonCard.css'
 
 function PokemonCard ({ pokemon }) {
@@ -8,7 +9,13 @@ function PokemonCard ({ pokemon }) {
             <span className="pokemon-tipo">{pokemon.tipo}</span>
             <p className="pokemon-descricao">{pokemon.descricao}</p>
             <p className="pokemon-personalidade">{pokemon.personalidade}</p>
-            <button className="btn-detalhes">Ver Detalhes</button>
+            <Link
+                to={`/pokemon/${pokemon.id}`}
+                className="btn-detalhes"
+                aria-label={`Ver detalhes de ${pokemon.nome}`}
+            >
+                Ver Detalhes
+            </Link>
         </div>
     )
 }

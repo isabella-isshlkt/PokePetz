@@ -1,0 +1,57 @@
+.como-adotar-intro {
+  margin-bottom: 24px;
+}
+
+.etapas-adocao {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.etapa-adocao {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.etapa-numero {
+  display: flex;
+  flex: 0 0 36px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.etapa-adocao h2 {
+  margin: 0 0 6px;
+  color: #1e293b;
+}
+
+.etapa-adocao p {
+  color: #475569;
+}
+
+.btn-catalogo {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-catalogo:hover {
+  background: #1e40af;
+}

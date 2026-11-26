@@ -1,0 +1,241 @@
+.pokemart-page {
+  max-width: 1126px;
+}
+
+.filtros-categoria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.btn-filtro {
+  padding: 8px 16px;
+  border: 2px solid #1d4ed8;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #1d4ed8;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-filtro.ativo,
+.btn-filtro:hover {
+  background-color: #1d4ed8;
+  color: #ffffff;
+}
+
+.loja-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.produto-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.produto-imagem {
+  width: 110px;
+  height: 110px;
+  border-radius: 12px;
+  background-color: #eff6ff;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.produto-categoria {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #fef9c3;
+  color: #854d0e;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.produto-card h2 {
+  margin: 0;
+  color: #1e293b;
+}
+
+.produto-descricao {
+  flex-grow: 1;
+  color: #475569;
+  font-size: 14px;
+}
+
+.produto-preco {
+  margin: 4px 0;
+  color: #1d4ed8;
+  font-size: 20px;
+}
+
+.btn-adicionar,
+.btn-finalizar {
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background-color: #1d4ed8;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-adicionar:hover {
+  background-color: #1e40af;
+}
+
+.carrinho-painel {
+  position: sticky;
+  top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.carrinho-painel h2 {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.carrinho-saldo {
+  margin-bottom: 16px;
+  color: #475569;
+  font-weight: 600;
+}
+
+.carrinho-login,
+.pedido-mensagem {
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.carrinho-login {
+  background-color: #eff6ff;
+  color: #1e40af;
+}
+
+.carrinho-login a {
+  color: inherit;
+  font-weight: 700;
+}
+
+.pedido-sucesso {
+  border: 1px solid #16a34a;
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.pedido-erro {
+  border: 1px solid #fca5a5;
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.carrinho-vazio {
+  color: #64748b;
+  font-style: italic;
+}
+
+.carrinho-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carrinho-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.carrinho-item-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.carrinho-controles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carrinho-controles button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #f8fafc;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.carrinho-controles .btn-remover {
+  border-color: #fca5a5;
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.carrinho-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+  padding-top: 12px;
+  border-top: 2px solid #e2e8f0;
+  font-size: 18px;
+}
+
+.btn-finalizar {
+  padding: 12px;
+  background-color: #16a34a;
+  font-size: 16px;
+}
+
+.btn-finalizar:hover:not(:disabled) {
+  background-color: #15803d;
+}
+
+.btn-finalizar:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .loja-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .carrinho-painel {
+    position: static;
+  }
+}

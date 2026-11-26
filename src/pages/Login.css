@@ -1,0 +1,94 @@
+.login-page {
+  max-width: 480px;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 32px auto;
+  padding: 32px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.login-card h1 {
+  margin: 0;
+  color: #1d4ed8;
+}
+
+.login-card > p {
+  color: #475569;
+}
+
+.login-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.login-campo input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #1e293b;
+  font: inherit;
+}
+
+.login-campo input:focus {
+  border-color: #1d4ed8;
+  outline: 2px solid rgba(29, 78, 216, 0.2);
+}
+
+.login-erro {
+  padding: 10px 12px;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.login-submit {
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-submit:hover:not(:disabled) {
+  background: #1e40af;
+}
+
+.login-submit:disabled,
+.login-alternar:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.login-alternar {
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  color: #1d4ed8;
+  font: inherit;
+  cursor: pointer;
+}
+
+.login-alternar:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    margin: 16px auto;
+    padding: 24px 18px;
+  }
+}
