@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { pokemons } from '../data/pokemons'
 import './PokemonDetalhes.css'
 
-function PokemonDetalhes({ adotarPokemon, adotados = [] }) {
+function PokemonDetalhes({ usuarioAtual, adotarPokemon }) {
   const { id } = useParams()
   const pokemon = pokemons.find((item) => item.id === Number(id))
 
@@ -15,7 +15,7 @@ function PokemonDetalhes({ adotarPokemon, adotados = [] }) {
     )
   }
 
-  // Verifica se ESTE Pokémon específico já foi adotado pelo usuário
+  const adotados = usuarioAtual ? usuarioAtual.adotados : []
   const jaAdotado = adotados.some((item) => item.id === pokemon.id)
 
   return (

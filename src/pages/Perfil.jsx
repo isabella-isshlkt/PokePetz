@@ -1,6 +1,10 @@
 import './Perfil.css'
 
-function Perfil({ adotados = [], saldo = 0, inventario = [], pedidos = [] }) {
+function Perfil({ usuarioAtual }) {
+  const adotados = usuarioAtual?.adotados ?? []
+  const saldo = usuarioAtual?.saldo
+  const inventario = usuarioAtual?.inventario ?? []
+  const pedidos = usuarioAtual?.pedidos ?? []
   const quantidadeItens = inventario.reduce(
     (total, item) => total + item.quantidade,
     0,
@@ -14,12 +18,14 @@ function Perfil({ adotados = [], saldo = 0, inventario = [], pedidos = [] }) {
       {/* Divisor 1: Informações Pessoais e Dinheiro */}
       <div className="perfil-secao perfil-cabecalho">
         <div>
-          <h2>Treinador(a) PokéPetz</h2>
-          <p>Status: Conta Ativa</p>
+          <h2>{usuarioAtual?.nome ?? 'Treinador(a) PokéPetz'}</h2>
+          <p>Status: {usuarioAtual ? 'Conta Ativa' : 'Faça login para consultar sua conta'}</p>
         </div>
         <div className="perfil-saldo">
           <span>Saldo disponível:</span>
-          <strong>₽ {saldo.toLocaleString('pt-BR')}</strong>
+          <strong>
+            {saldo === undefined ? '—' : `₽ ${saldo.toLocaleString('pt-BR')}`}
+          </strong>
         </div>
       </div>
 

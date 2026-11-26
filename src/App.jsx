@@ -9,26 +9,102 @@ import PokeMart from './pages/PokeMart'
 import Perfil from './pages/Perfil'
 import PokemonDetalhes from './pages/PokemonDetalhes'
 import PokeDollar from './pages/PokeDollar'
+import Login from './pages/Login'
 
 function App() {
-  const [adotados, setAdotados] = useState([])
-  const [saldo, setSaldo] = useState(1000)
-  const [carrinho, setCarrinho] = useState([])
-  const [pedidos, setPedidos] = useState([])
-  const [inventario, setInventario] = useState([])
+  // Lista de contas cadastradas (começa com uma conta pronta para testes)
+  const [usuarios, setUsuarios] = useState([
+    {
+      id: 1,
+      nome: 'Ash Ketchum',
+      email: 'ash@pokepetz.com',
+      senha: '123',
+      saldo: 1000,
+      adotados: [],
+      pedidos: [],
+      inventario: []
+    }
+  ])
 
+  const [usuarioLogadoId, setUsuarioLogadoId] = useState(null)
+  const [carrinho, setCarrinho] = useState([])
+
+  // Busca o objeto completo do usuário logado no momento
+  const usuarioAtual = usuarios.find((u) => u.id === usuarioLogadoId) || null
+
+  // --- FUNÇÕES DE AUTENTICAÇÃO ---
+  function cadastrarUsuario({ nome, email, senha }) {
+    const emailJaExiste = usuarios.some(
+      (u) => u.email.toLowerCase() === email.trim().toLowerCase()
+    )
+
+    if (emailJaExiste) {
+      return { ok: false, erro: 'Este e-mail já está cadastrado.' }
+    }
+
+    const novoUsuario = {
+      id: Date.now(),
+      nome: nome.trim(),
+      email: email.trim().toLowerCase(),
+      senha,
+      saldo: 1000,
+      adotados: [],
+      pedidos: [],
+      inventario: []
+    }
+
+    setUsuarios((atual) => [...atual, novoUsuario])
+    setUsuarioLogadoId(novoUsuario.id)
+    setCarrinho([])
+    return { ok: true }
+  }
+
+  function loginUsuario({ email, senha }) {
+    const encontrado = usuarios.find(
+      (u) =>
+        u.email.toLowerCase() === email.trim().toLowerCase() &&
+        u.senha === senha
+    )
+
+    if (!encontrado) {
+      return { ok: false, erro: 'E-mail ou senha incorretos.' }
+    }
+
+    setUsuarioLogadoId(encontrado.id)
+    setCarrinho([])
+    return { ok: true }
+  }
+
+  function logoutUsuario() {
+    setUsuarioLogadoId(null)
+    setCarrinho([])
+  }
+
+  // --- FUNÇÕES ASSOCIADAS À CONTA LOGADA ---
   function adotarPokemon(pokemon) {
-    setAdotados((atuais) =>
-      atuais.some((item) => item.id === pokemon.id)
-        ? atuais
-        : [...atuais, pokemon],
+    if (!usuarioAtual) return
+
+    setUsuarios((atual) =>
+      atual.map((u) => {
+        if (u.id !== usuarioAtual.id) return u
+        const jaExiste = u.adotados.some((p) => p.id === pokemon.id)
+        if (jaExiste) return u
+        return { ...u, adotados: [...u.adotados, pokemon] }
+      })
     )
   }
 
   function adicionarSaldo(valor) {
-    setSaldo((atual) => atual + valor)
+    if (!usuarioAtual) return
+
+    setUsuarios((atual) =>
+      atual.map((u) =>
+        u.id === usuarioAtual.id ? { ...u, saldo: u.saldo + valor } : u
+      )
+    )
   }
 
+  // --- FUNÇÕES DO CARRINHO E LOJA ---
   function adicionarAoCarrinho(produto) {
     setCarrinho((atual) => {
       const itemExistente = atual.find((item) => item.id === produto.id)
@@ -36,7 +112,7 @@ function App() {
         return atual.map((item) =>
           item.id === produto.id
             ? { ...item, quantidade: item.quantidade + 1 }
-            : item,
+            : item
         )
       }
       return [...atual, { ...produto, quantidade: 1 }]
@@ -47,11 +123,9 @@ function App() {
     setCarrinho((atual) =>
       atual
         .map((item) =>
-          item.id === id
-            ? { ...item, quantidade: item.quantidade + delta }
-            : item,
+          item.id === id ? { ...item, quantidade: item.quantidade + delta } : item
         )
-        .filter((item) => item.quantidade > 0),
+        .filter((item) => item.quantidade > 0)
     )
   }
 
@@ -60,48 +134,72 @@ function App() {
   }
 
   function finalizarPedido() {
-    if (carrinho.length === 0) return false
+    if (!usuarioAtual) {
+      return { ok: false, mensagem: 'Faça login para finalizar sua compra.' }
+    }
+    if (carrinho.length === 0) {
+      return { ok: false, mensagem: 'Seu carrinho está vazio.' }
+    }
 
     const total = carrinho.reduce(
       (soma, item) => soma + item.preco * item.quantidade,
-      0,
+      0
     )
-    if (total > saldo) return false
+
+    if (usuarioAtual.saldo < total) {
+      return {
+        ok: false,
+        mensagem: 'Saldo insuficiente! Ganhe mais PokéDollars antes de comprar.'
+      }
+    }
 
     const novoPedido = {
       id: Date.now(),
       data: new Date().toLocaleDateString('pt-BR'),
       itens: carrinho,
-      total,
+      total
     }
 
-    setPedidos((atuais) => [novoPedido, ...atuais])
-    setInventario((atual) => {
-      const atualizado = [...atual]
-      carrinho.forEach((produto) => {
-        const indiceExistente = atualizado.findIndex(
-          (item) => item.id === produto.id,
-        )
-        if (indiceExistente !== -1) {
-          atualizado[indiceExistente] = {
-            ...atualizado[indiceExistente],
-            quantidade:
-              atualizado[indiceExistente].quantidade + produto.quantidade,
+    setUsuarios((atual) =>
+      atual.map((u) => {
+        if (u.id !== usuarioAtual.id) return u
+
+        // Soma quantidades se o item já existir no inventário do usuário
+        const inventarioAtualizado = [...u.inventario]
+        carrinho.forEach((itemComprado) => {
+          const idx = inventarioAtualizado.findIndex(
+            (inv) => inv.id === itemComprado.id
+          )
+          if (idx >= 0) {
+            inventarioAtualizado[idx] = {
+              ...inventarioAtualizado[idx],
+              quantidade:
+                inventarioAtualizado[idx].quantidade + itemComprado.quantidade
+            }
+          } else {
+            inventarioAtualizado.push({ ...itemComprado })
           }
-        } else {
-          atualizado.push({ ...produto })
+        })
+
+        return {
+          ...u,
+          saldo: u.saldo - total,
+          pedidos: [novoPedido, ...u.pedidos],
+          inventario: inventarioAtualizado
         }
       })
-      return atualizado
-    })
-    setSaldo((atual) => atual - total)
+    )
+
     setCarrinho([])
-    return true
+    return {
+      ok: true,
+      mensagem: '✅ Pedido finalizado! Itens enviados ao seu inventário.'
+    }
   }
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar usuarioAtual={usuarioAtual} logoutUsuario={logoutUsuario} />
       <main className="app-content">
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -111,7 +209,7 @@ function App() {
             path="/produtos"
             element={
               <PokeMart
-                saldo={saldo}
+                usuarioAtual={usuarioAtual}
                 carrinho={carrinho}
                 adicionarAoCarrinho={adicionarAoCarrinho}
                 alterarQuantidade={alterarQuantidade}
@@ -124,29 +222,38 @@ function App() {
             path="/pokemon/:id"
             element={
               <PokemonDetalhes
+                usuarioAtual={usuarioAtual}
                 adotarPokemon={adotarPokemon}
-                adotados={adotados}
               />
             }
           />
           <Route
-            path="/pokecoins"
+            path="/pokedollar"
             element={
-              <PokeDollar saldo={saldo} adicionarSaldo={adicionarSaldo} />
+              <PokeDollar
+                saldo={usuarioAtual ? usuarioAtual.saldo : 0}
+                adicionarSaldo={adicionarSaldo}
+              />
             }
           />
           <Route
             path="/perfil"
             element={
               <Perfil
-                adotados={adotados}
-                saldo={saldo}
-                inventario={inventario}
-                pedidos={pedidos}
+                usuarioAtual={usuarioAtual}
+                logoutUsuario={logoutUsuario}
               />
             }
           />
-          <Route path="*" element={<Inicio />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                loginUsuario={loginUsuario}
+                cadastrarUsuario={cadastrarUsuario}
+              />
+            }
+          />
         </Routes>
       </main>
     </BrowserRouter>

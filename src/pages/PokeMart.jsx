@@ -3,7 +3,7 @@ import { produtos } from '../data/produtos'
 import './PokeMart.css'
 
 function PokeMart({
-  saldo = 0,
+  usuarioAtual,
   carrinho = [],
   adicionarAoCarrinho,
   alterarQuantidade,
@@ -13,6 +13,7 @@ function PokeMart({
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todos')
   const [pedidoConfirmado, setPedidoConfirmado] = useState(false)
   const [erroPedido, setErroPedido] = useState('')
+  const saldo = usuarioAtual?.saldo ?? 0
 
   // Gera os botões de categoria automaticamente a partir do seu produtos.js
   const categorias = ['Todos', ...new Set(produtos.map((p) => p.categoria))]
@@ -28,10 +29,12 @@ function PokeMart({
   )
 
   function handleFinalizar() {
-    const finalizado = finalizarPedido()
-    if (!finalizado) {
+    const resultado = finalizarPedido()
+    if (!resultado?.ok) {
       setPedidoConfirmado(false)
-      setErroPedido('Saldo insuficiente para finalizar este pedido.')
+      setErroPedido(
+        resultado?.mensagem || 'Não foi possível finalizar o pedido.',
+      )
       return
     }
 
@@ -94,7 +97,11 @@ function PokeMart({
               ✅ Pedido finalizado com sucesso! Seus itens foram enviados ao seu inventário.
             </div>
           )}
-          {erroPedido && <p className="pedido-erro">{erroPedido}</p>}
+          {erroPedido && (
+            <p className="pedido-erro" role="alert">
+              {erroPedido}
+            </p>
+          )}
 
           {carrinho.length === 0 ? (
             <p className="carrinho-vazio">Seu carrinho está vazio.</p>
