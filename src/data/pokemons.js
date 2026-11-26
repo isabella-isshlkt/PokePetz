@@ -1,13 +1,13 @@
-import bulbasaur from '../assets/001-CFs5Zyd6.png'
-import vulpix from '../assets/037-M-GqiLgT.png'
-import meowth from '../assets/052-MoKvkorY.png'
-import growlithe from '../assets/058-Zub3KZsB.png'
-import cubone from '../assets/104-8aXc3bs1.png'
-import dragonite from '../assets/149-CE8uNbU1.png'
-import unown from '../assets/201-BswEgbCk.png'
-import bunnelby from '../assets/659-CrRBpkyD.png'
-import swirlix from '../assets/684-DEbmjnYE.png'
-import slurpuff from '../assets/685-Bd5EF0_H.png'
+import bulbasaur from '../assets/pokemons/001-CFs5Zyd6.png'
+import vulpix from '../assets/pokemons/037-M-GqiLgT.png'
+import meowth from '../assets/pokemons/052-MoKvkorY.png'
+import growlithe from '../assets/pokemons/058-Zub3KZsB.png'
+import cubone from '../assets/pokemons/104-8aXc3bs1.png'
+import dragonite from '../assets/pokemons/149-CE8uNbU1.png'
+import unown from '../assets/pokemons/201-BswEgbCk.png'
+import bunnelby from '../assets/pokemons/659-CrRBpkyD.png'
+import swirlix from '../assets/pokemons/684-DEbmjnYE.png'
+import slurpuff from '../assets/pokemons/685-Bd5EF0_H.png'
 
 export const pokemons = [
   {

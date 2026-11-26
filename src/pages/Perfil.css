@@ -72,3 +72,24 @@
   height: 100px;
   object-fit: contain;
 }
+
+.perfil-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+
+.perfil-lista li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+@media (max-width: 480px) {
+  .perfil-lista li {
+    flex-direction: column;
+  }
+}

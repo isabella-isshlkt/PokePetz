@@ -13,6 +13,7 @@ function Navbar() {
             <li><NavLink to="/adote">Adote aqui!</NavLink></li>
             <li><NavLink to="/como-adotar">Como adotar</NavLink></li>
             <li><NavLink to="/produtos">PokéMart</NavLink></li>
+            <li><NavLink to="/pokecoins">PokéDollars</NavLink></li>
             <li><NavLink to="/perfil">Meu Perfil</NavLink></li>
         </ul>
         </nav>

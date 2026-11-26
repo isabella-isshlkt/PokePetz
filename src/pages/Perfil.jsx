@@ -1,6 +1,11 @@
 import './Perfil.css'
 
-function Perfil({ adotados = [] }) {
+function Perfil({ adotados = [], saldo = 0, inventario = [], pedidos = [] }) {
+  const quantidadeItens = inventario.reduce(
+    (total, item) => total + item.quantidade,
+    0,
+  )
+
   return (
     <section className="page">
       <h1>Meu Perfil</h1>
@@ -14,7 +19,7 @@ function Perfil({ adotados = [] }) {
         </div>
         <div className="perfil-saldo">
           <span>Saldo disponível:</span>
-          <strong>₽ 1.000</strong>
+          <strong>₽ {saldo.toLocaleString('pt-BR')}</strong>
         </div>
       </div>
 
@@ -39,14 +44,36 @@ function Perfil({ adotados = [] }) {
 
       {/* Divisor 3: Meu Inventário (engatilhado para Versão 3 e 4) */}
       <div className="perfil-secao">
-        <h2>Meu Inventário (0)</h2>
-        <p className="texto-vazio">Nenhum item comprado no PokéMart ainda.</p>
+        <h2>Meu Inventário ({quantidadeItens})</h2>
+        {inventario.length === 0 ? (
+          <p className="texto-vazio">Nenhum item comprado no PokéMart ainda.</p>
+        ) : (
+          <ul className="perfil-lista">
+            {inventario.map((item) => (
+              <li key={item.id}>
+                <span>{item.nome}</span>
+                <strong>Quantidade: {item.quantidade}</strong>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       {/* Divisor 4: Meus Pedidos (engatilhado para Versão 3 e 4) */}
       <div className="perfil-secao">
-        <h2>Meus Pedidos (0)</h2>
-        <p className="texto-vazio">Você ainda não realizou nenhum pedido.</p>
+        <h2>Meus Pedidos ({pedidos.length})</h2>
+        {pedidos.length === 0 ? (
+          <p className="texto-vazio">Você ainda não realizou nenhum pedido.</p>
+        ) : (
+          <ul className="perfil-lista">
+            {pedidos.map((pedido) => (
+              <li key={pedido.id}>
+                <span>Pedido de {pedido.data}</span>
+                <strong>₽ {pedido.total.toLocaleString('pt-BR')}</strong>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   )

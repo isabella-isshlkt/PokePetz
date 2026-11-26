@@ -1,0 +1,62 @@
+.moedas-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 36px 24px;
+  max-width: 480px;
+  margin: 32px auto 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.moedas-saldo {
+  background-color: #fef9c3;
+  border: 2px solid #facc15;
+  padding: 16px 32px;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.moedas-saldo span {
+  display: block;
+  font-size: 14px;
+  color: #854d0e;
+  margin-bottom: 4px;
+}
+
+.moedas-saldo strong {
+  font-size: 32px;
+  color: #1e293b;
+}
+
+.btn-sortear {
+  background-color: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+.btn-sortear:hover {
+  background-color: #1e40af;
+}
+
+.btn-sortear:active {
+  transform: scale(0.96);
+}
+
+.moedas-feedback {
+  background-color: #dcfce7;
+  border: 1px solid #16a34a;
+  color: #166534;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+}
